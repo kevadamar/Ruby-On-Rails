@@ -1,5 +1,15 @@
 <%= form_for @book do |f| %>
     <%= f.label "judul" %>
-    </br>
     <%= f.text_field :title %>
+     </br>
+    <%= f.label "harga" %>
+    <%= f.text_field :price %>
+    </br>
+    <%= f.label "page" %>
+    <%= f.text_field :page %>
+    </br>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    </br>
+    <%= f.submit "tekan aku" %>
 <% end %>

@@ -2,18 +2,22 @@ class BooksController < ApplicationController
   before_action :param_id, only: [:edit,:show, :update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.all.order(title: :asc)
   end
 
   def show
   end
 
   def new
-      @book = Book.new param_permit
+      @book = Book.new
+  end
 
-      if @book.save
-        redirect_to books_path
-      end
+  def create
+    @book = Book.new param_permit
+
+    if @book.save
+      redirect_to books_path
+    end
   end
 
   def edit
@@ -29,7 +33,7 @@ class BooksController < ApplicationController
 
   def destroy
     if @book.destroy
-      redirect_to books_path
+      redirect_to books_path, notice: "Buku Berhasil Di Hapus"
     end
   end
 
@@ -40,7 +44,7 @@ class BooksController < ApplicationController
   end
 
   def param_permit
-    params.permit(:title,:price,:page,:description)
+    params.require(:book).permit(:title,:price,:page,:description)
   end
 
 end
